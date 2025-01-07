@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -28,7 +29,8 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfiguration()))
                 .authorizeHttpRequests(request ->
                         request.requestMatchers("/api/**").authenticated()
-                                .anyRequest().permitAll());
+                                .anyRequest().permitAll())
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class);
 
         return http.build();
     }
@@ -42,9 +44,9 @@ public class SecurityConfiguration {
                         "http://localhost:3000",
                         "http://localhost:5173",
                         "http://localhost:4200"));
-                cfg.setAllowedMethods(Collections.singletonList("*"));
-                cfg.setAllowedHeaders(Collections.singletonList("*"));
-                cfg.setAllowCredentials(true);
+                cfg.setAllowedMethods(Collections.singletonList("*")); // Allows all HTTP methods eg. PUT, GET, POST, etc.
+                cfg.setAllowedHeaders(Collections.singletonList("*")); // Allows all headers e.g. Content-Type, Authorization, etc.
+                cfg.setAllowCredentials(true); // Allows credentials to be included in requests (e.g., cookies for sessions, JWT tokens).
                 cfg.setExposedHeaders(List.of("Authorization"));
                 cfg.setMaxAge(3600L);
                 return cfg;
