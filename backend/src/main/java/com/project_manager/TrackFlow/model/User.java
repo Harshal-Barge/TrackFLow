@@ -22,5 +22,5 @@ public class User {
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
     private List<Issue> assignedIssues = new ArrayList<>();
 
-    private Integer projectsCreated;
+    private int projectsCreated;
 }
