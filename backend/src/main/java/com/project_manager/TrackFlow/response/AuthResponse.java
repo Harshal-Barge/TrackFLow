@@ -1,4 +1,4 @@
-package com.project_manager.TrackFlow.model;
+package com.project_manager.TrackFlow.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

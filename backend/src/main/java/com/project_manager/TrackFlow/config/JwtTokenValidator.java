@@ -27,10 +27,10 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         if(jwt != null){
             jwt = jwt.substring(7); //Trimming the "bearer" from header
             try{
-                SecretKey key = Keys.hmacShaKeyFor(JwtConstants.JWT_HEADER.getBytes());
+                SecretKey key = Keys.hmacShaKeyFor(JwtConstants.SECRET_KEY.getBytes());
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJwt(jwt).getBody();
 
-                String email = claims.getSubject();
+                String email = String.valueOf(claims.get("email"));
 
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email,null,new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
