@@ -1,6 +1,5 @@
 package com.project_manager.TrackFlow.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,22 +8,25 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Chat {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String fullName;
-    private String email;
-    private String password;
+    private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
-    private List<Issue> assignedIssues = new ArrayList<>();
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages = new ArrayList<>();
 
-    private int projectsCreated;
+    @OneToOne
+    private Project project;
+
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
+
 }
