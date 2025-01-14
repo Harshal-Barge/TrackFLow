@@ -1,4 +1,4 @@
-package com.project_manager.TrackFlow.service;
+package com.project_manager.TrackFlow.service.impl;
 
 import com.project_manager.TrackFlow.model.User;
 import com.project_manager.TrackFlow.repository.UserRepository;

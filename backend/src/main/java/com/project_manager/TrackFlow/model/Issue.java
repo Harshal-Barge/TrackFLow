@@ -29,7 +29,7 @@ public class Issue {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id_key")
     private Project project;
 
     @ManyToOne
