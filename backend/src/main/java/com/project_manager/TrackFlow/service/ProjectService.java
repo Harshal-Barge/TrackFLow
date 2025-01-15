@@ -3,7 +3,6 @@ package com.project_manager.TrackFlow.service;
 import com.project_manager.TrackFlow.model.Chat;
 import com.project_manager.TrackFlow.model.Project;
 import com.project_manager.TrackFlow.model.User;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface ProjectService {
 
     Project getProjectById(Integer projectId) throws Exception;
 
-    void deleteProject(Integer projectId, Integer userId) throws Exception;
+    void deleteProject(Integer projectId) throws Exception;
 
     Project updateProject(Project updatedProject, Integer projectId) throws Exception;
 
@@ -24,5 +23,7 @@ public interface ProjectService {
     void removeUserFromProject(Integer projectId, Integer userId) throws Exception;
 
     Chat getChatByProjectId(Integer projectId) throws Exception;
+
+    List<Project> searchProject(String partialName, User user) throws Exception;
 
 }

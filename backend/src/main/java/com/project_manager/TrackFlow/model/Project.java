@@ -19,11 +19,11 @@ public class Project {
     private Integer id;
 
     private String name;
+    private String category;
     private String description;
 
     private List<String> tags = new ArrayList<>();
 
-    @JsonIgnore
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Chat chat;
 
