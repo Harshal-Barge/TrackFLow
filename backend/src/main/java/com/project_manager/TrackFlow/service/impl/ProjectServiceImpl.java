@@ -3,13 +3,19 @@ package com.project_manager.TrackFlow.service.impl;
 import com.project_manager.TrackFlow.model.Chat;
 import com.project_manager.TrackFlow.model.Project;
 import com.project_manager.TrackFlow.model.User;
+import com.project_manager.TrackFlow.repository.ProjectRepository;
 import com.project_manager.TrackFlow.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
+
+    @Autowired
+    private ProjectRepository projectRepo;
+
     @Override
     public Project createProject(Project project, User user) throws Exception {
         return null;
