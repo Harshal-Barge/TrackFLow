@@ -1,13 +1,16 @@
 package com.project_manager.TrackFlow.service.impl;
 
+import com.project_manager.TrackFlow.Exceptions.UserNotFound;
 import com.project_manager.TrackFlow.config.JwtProvider;
 import com.project_manager.TrackFlow.model.User;
 import com.project_manager.TrackFlow.repository.UserRepository;
 import com.project_manager.TrackFlow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(String email) throws Exception {
         Optional<User> user = userRepo.findByEmail(email);
         if(user.isEmpty()){
-            throw new Exception("User Not Found");
+            throw new UserNotFound();
         }
         return user.get();
     }
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public User findUserById(Integer id) throws Exception {
         Optional<User> user = userRepo.findById(id);
         if(user.isEmpty()){
-            throw new Exception("User Not Found");
+            throw new UserNotFound();
         }
         return user.get();
     }

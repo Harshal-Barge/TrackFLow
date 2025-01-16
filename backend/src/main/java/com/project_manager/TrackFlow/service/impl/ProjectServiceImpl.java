@@ -1,5 +1,6 @@
 package com.project_manager.TrackFlow.service.impl;
 
+import com.project_manager.TrackFlow.Exceptions.ProjectNotFound;
 import com.project_manager.TrackFlow.model.Chat;
 import com.project_manager.TrackFlow.model.Project;
 import com.project_manager.TrackFlow.model.User;
@@ -58,13 +59,14 @@ public class ProjectServiceImpl implements ProjectService {
     public Project getProjectById(Integer projectId) throws Exception {
         Optional<Project> project = projectRepo.findById(projectId);
         if(project.isEmpty()){
-            throw new Exception("Project Not Found");
+            throw new ProjectNotFound();
         }
         return project.get();
     }
 
     @Override
-    public void deleteProject(Integer projectId) throws Exception {
+    public void deleteProject(Integer projectId, User user) throws Exception {
+        userService.updateProjectsCreated(user, -1);
         projectRepo.deleteById(projectId);
     }
 

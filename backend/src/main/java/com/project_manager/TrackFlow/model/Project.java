@@ -24,6 +24,7 @@ public class Project {
 
     private List<String> tags = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Chat chat;
 
