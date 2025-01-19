@@ -1,9 +1,11 @@
 package com.project_manager.TrackFlow.controller;
 
-import com.project_manager.TrackFlow.model.Chat;
-import com.project_manager.TrackFlow.model.Project;
-import com.project_manager.TrackFlow.model.User;
+import com.project_manager.TrackFlow.model.*;
+import com.project_manager.TrackFlow.request.InviteRequest;
+import com.project_manager.TrackFlow.request.IssueRequest;
 import com.project_manager.TrackFlow.response.ApiResponse;
+import com.project_manager.TrackFlow.service.InvitationService;
+import com.project_manager.TrackFlow.service.IssueService;
 import com.project_manager.TrackFlow.service.ProjectService;
 import com.project_manager.TrackFlow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class ProjectController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private InvitationService invitationService;
+
+    @Autowired
+    private IssueService issueService;
+
     @GetMapping("/getProjects")
     public ResponseEntity<List<Project>> getProjects(
             @RequestParam String category,
@@ -36,10 +44,8 @@ public class ProjectController {
 
     @GetMapping("/{projectId}")
     public ResponseEntity<Project> getProjectById(
-            @PathVariable Integer projectId,
-            @RequestHeader("Authorization") String jwt
+            @PathVariable Integer projectId
     ) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
         Project project = projectService.getProjectById(projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
@@ -57,10 +63,8 @@ public class ProjectController {
     @PatchMapping("/{projectId}")
     public ResponseEntity<Project> updateProject(
             @PathVariable Integer projectId,
-            @RequestBody Project project,
-            @RequestHeader("Authorization") String jwt
+            @RequestBody Project project
     ) throws Exception {
-        User user = userService.findUserProfileByJwt(jwt);
         Project updatedProject = projectService.updateProject(project, projectId);
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
@@ -88,12 +92,30 @@ public class ProjectController {
 
     @GetMapping("/getChat/{projectId}")
     public ResponseEntity<Chat> getChatByProjectId(
-            @PathVariable Integer projectId,
+            @PathVariable Integer projectId
+    ) throws Exception {
+        Chat chat = projectService.getChatByProjectId(projectId);
+        return new ResponseEntity<>(chat, HttpStatus.OK);
+    }
+
+    @PostMapping("/invite")
+    public ResponseEntity<ApiResponse> sendInvite(
+            @RequestBody InviteRequest inviteRequest
+    ) throws Exception {
+        invitationService.sendInvitation(inviteRequest.getEmail(), inviteRequest.getProjectId());
+        ApiResponse response = new ApiResponse("Invitation sent successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/accept_invite")
+    public ResponseEntity<Invitation> acceptInvite(
+            @RequestParam String token,
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        Chat chat = projectService.getChatByProjectId(projectId);
-        return new ResponseEntity<>(chat, HttpStatus.OK);
+        Invitation invitation = invitationService.acceptInvitation(token, user.getId());
+        projectService.addUserToProject(invitation.getProjectId(), user.getId());
+        return new ResponseEntity<>(invitation, HttpStatus.ACCEPTED);
     }
 
 }
