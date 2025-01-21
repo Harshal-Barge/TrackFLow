@@ -7,6 +7,7 @@ import com.project_manager.TrackFlow.request.LoginRequest;
 import com.project_manager.TrackFlow.model.User;
 import com.project_manager.TrackFlow.repository.UserRepository;
 import com.project_manager.TrackFlow.service.AuthService;
+import com.project_manager.TrackFlow.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,13 +31,17 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private SubscriptionService subscriptionService;
+
     public AuthResponse createUser(User user){
         Optional<User> usr = userRepository.findByEmail(user.getEmail());
         if(usr.isPresent()){
             throw new UserAlreadyExists(user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        subscriptionService.createSubscription(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
