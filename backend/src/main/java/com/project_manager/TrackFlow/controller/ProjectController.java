@@ -33,8 +33,8 @@ public class ProjectController {
 
     @GetMapping("/getProjects")
     public ResponseEntity<List<Project>> getProjects(
-            @RequestParam String category,
-            @RequestParam String tag,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String tag,
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
