@@ -1,5 +1,6 @@
 package com.project_manager.TrackFlow.service.impl;
 
+import com.project_manager.TrackFlow.Exceptions.ResourceNotFound;
 import com.project_manager.TrackFlow.model.Issue;
 import com.project_manager.TrackFlow.model.Project;
 import com.project_manager.TrackFlow.model.User;
@@ -27,25 +28,25 @@ public class IssueServiceImpl implements IssueService {
     private UserService userService;
 
     @Override
-    public Issue getIssueById(Integer id) throws Exception {
+    public Issue getIssueById(Integer id) {
         Optional<Issue> issue = issueRepository.findById(id);
         if(issue.isEmpty()){
-            throw new Exception("Issue Not Found With IssueId : " + id);
+            throw new ResourceNotFound("Issue Not Found With IssueId : " + id);
         }
         return issue.get();
     }
 
     @Override
-    public List<Issue> getIssuesByProjectId(Integer projectId) throws Exception {
-        List<Issue> issues = issueRepository.findByProjectId(projectId);
+    public List<Issue> getIssuesByProjectId(Integer projectId) {
+        List<Issue> issues = issueRepository.findByProject_Id(projectId);
         if(issues.isEmpty()){
-            throw new Exception("No issues for this project");
+            throw new ResourceNotFound("No issues created for this project");
         }
         return issues;
     }
 
     @Override
-    public Issue createIssue(IssueRequest issueRequest) throws Exception {
+    public Issue createIssue(IssueRequest issueRequest) {
         Project project = projectService.getProjectById(issueRequest.getProjectId());
 
         Issue issue = new Issue();
@@ -60,12 +61,12 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public void deleteIssue(Integer issueId) throws Exception {
+    public void deleteIssue(Integer issueId) {
         issueRepository.deleteById(issueId);
     }
 
     @Override
-    public Issue addUserToIssue(Integer issueId, Integer userId) throws Exception {
+    public Issue addUserToIssue(Integer issueId, Integer userId) {
         User user = userService.findUserById(userId);
         Issue issue = getIssueById(issueId);
         issue.setAssignee(user);
@@ -73,7 +74,7 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public Issue updateStatus(Integer issueId, String status) throws Exception {
+    public Issue updateStatus(Integer issueId, String status) {
         Issue issue = getIssueById(issueId);
         issue.setStatus(status);
         return issueRepository.save(issue);

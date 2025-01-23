@@ -1,11 +1,13 @@
 package com.project_manager.TrackFlow.service.impl;
 
+import com.project_manager.TrackFlow.Exceptions.PaymentException;
 import com.razorpay.RazorpayClient;
 import com.razorpay.PaymentLink;
 import com.project_manager.TrackFlow.model.PlanType;
 import com.project_manager.TrackFlow.model.User;
 import com.project_manager.TrackFlow.response.PaymentLinkResponse;
 import com.project_manager.TrackFlow.service.PaymentService;
+import com.razorpay.RazorpayException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class PaymentServiceImpl implements PaymentService {
     private String apiSecret;
 
     @Override
-    public PaymentLinkResponse createPaymentLink(PlanType planType, User user) throws Exception {
+    public PaymentLinkResponse createPaymentLink(PlanType planType, User user) {
         int amount = 7900;
         if(planType.equals(PlanType.ANNUALLY)){
             amount = (int)((amount * 12) * 0.7);;
@@ -46,8 +48,8 @@ public class PaymentServiceImpl implements PaymentService {
 
             return new PaymentLinkResponse(payment.get("id"), payment.get("short_url"));
 
-        } catch (Exception e) {
-            throw new Exception("Failed to Process Payment");
+        } catch (RazorpayException e) {
+            throw new PaymentException("Failed to Process Payment");
         }
     }
 }

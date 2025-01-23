@@ -22,7 +22,6 @@ public class Issue {
     private String title;
     private String description;
     private String status;
-    private Integer projectId;
     private String priority;
     private LocalDate dueDate;
     private List<String> tags;

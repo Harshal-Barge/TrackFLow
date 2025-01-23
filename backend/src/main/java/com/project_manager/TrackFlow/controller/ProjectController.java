@@ -2,7 +2,6 @@ package com.project_manager.TrackFlow.controller;
 
 import com.project_manager.TrackFlow.model.*;
 import com.project_manager.TrackFlow.request.InviteRequest;
-import com.project_manager.TrackFlow.request.IssueRequest;
 import com.project_manager.TrackFlow.response.ApiResponse;
 import com.project_manager.TrackFlow.service.InvitationService;
 import com.project_manager.TrackFlow.service.IssueService;
@@ -36,7 +35,7 @@ public class ProjectController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String tag,
             @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project> projects = projectService.getProjectByTeam(user, category, tag);
         return new ResponseEntity<>(projects, HttpStatus.OK);
@@ -45,7 +44,7 @@ public class ProjectController {
     @GetMapping("/{projectId}")
     public ResponseEntity<Project> getProjectById(
             @PathVariable Integer projectId
-    ) throws Exception {
+    ) {
         Project project = projectService.getProjectById(projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
@@ -54,7 +53,7 @@ public class ProjectController {
     public ResponseEntity<Project> createProject(
             @RequestBody Project project,
             @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwt);
         Project createdProject = projectService.createProject(project,user);
         return new ResponseEntity<>(createdProject, HttpStatus.OK);
@@ -64,7 +63,7 @@ public class ProjectController {
     public ResponseEntity<Project> updateProject(
             @PathVariable Integer projectId,
             @RequestBody Project project
-    ) throws Exception {
+    ) {
         Project updatedProject = projectService.updateProject(project, projectId);
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
@@ -73,7 +72,7 @@ public class ProjectController {
     public ResponseEntity<ApiResponse> deleteProject(
             @PathVariable Integer projectId,
             @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwt);
         projectService.deleteProject(projectId, user);
         ApiResponse response = new ApiResponse("Project Deleted Successfully");
@@ -84,7 +83,7 @@ public class ProjectController {
     public ResponseEntity<List<Project>> searchProject(
             @RequestParam String keyWord,
             @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwt);
         List<Project> projects = projectService.searchProject(keyWord, user);
         return new ResponseEntity<>(projects, HttpStatus.OK);
@@ -93,7 +92,7 @@ public class ProjectController {
     @GetMapping("/getChat/{projectId}")
     public ResponseEntity<Chat> getChatByProjectId(
             @PathVariable Integer projectId
-    ) throws Exception {
+    ) {
         Chat chat = projectService.getChatByProjectId(projectId);
         return new ResponseEntity<>(chat, HttpStatus.OK);
     }
@@ -101,7 +100,7 @@ public class ProjectController {
     @PostMapping("/invite")
     public ResponseEntity<ApiResponse> sendInvite(
             @RequestBody InviteRequest inviteRequest
-    ) throws Exception {
+    ) {
         invitationService.sendInvitation(inviteRequest.getEmail(), inviteRequest.getProjectId());
         ApiResponse response = new ApiResponse("Invitation sent successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -111,7 +110,7 @@ public class ProjectController {
     public ResponseEntity<Invitation> acceptInvite(
             @RequestParam String token,
             @RequestHeader("Authorization") String jwt
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwt);
         Invitation invitation = invitationService.acceptInvitation(token, user.getId());
         projectService.addUserToProject(invitation.getProjectId(), user.getId());

@@ -8,22 +8,22 @@ import java.util.List;
 
 public interface ProjectService {
 
-    Project createProject(Project project, User user) throws Exception;
+    Project createProject(Project project, User user);
 
-    List<Project> getProjectByTeam(User user, String category, String tag) throws Exception;
+    List<Project> getProjectByTeam(User user, String category, String tag);
 
-    Project getProjectById(Integer projectId) throws Exception;
+    Project getProjectById(Integer projectId);
 
-    void deleteProject(Integer projectId, User user) throws Exception;
+    void deleteProject(Integer projectId, User user);
 
-    Project updateProject(Project updatedProject, Integer projectId) throws Exception;
+    Project updateProject(Project updatedProject, Integer projectId);
 
-    void addUserToProject(Integer projectId, Integer userId) throws Exception;
+    void addUserToProject(Integer projectId, Integer userId);
 
-    void removeUserFromProject(Integer projectId, Integer userId) throws Exception;
+    void removeUserFromProject(Integer projectId, Integer userId);
 
-    Chat getChatByProjectId(Integer projectId) throws Exception;
+    Chat getChatByProjectId(Integer projectId);
 
-    List<Project> searchProject(String partialName, User user) throws Exception;
+    List<Project> searchProject(String partialName, User user);
 
 }

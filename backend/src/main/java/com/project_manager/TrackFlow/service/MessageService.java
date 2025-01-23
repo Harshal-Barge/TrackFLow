@@ -6,7 +6,7 @@ import com.project_manager.TrackFlow.model.User;
 import java.util.List;
 
 public interface MessageService {
-    Message sendMessage(User sender, Integer projectId, String content) throws Exception;
+    Message sendMessage(User sender, Integer projectId, String content);
 
-    List<Message> getMessagesByProjectId(Integer projectId) throws Exception;
+    List<Message> getMessagesByProjectId(Integer projectId);
 }

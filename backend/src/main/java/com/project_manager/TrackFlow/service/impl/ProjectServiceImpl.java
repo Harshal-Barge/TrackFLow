@@ -1,6 +1,6 @@
 package com.project_manager.TrackFlow.service.impl;
 
-import com.project_manager.TrackFlow.Exceptions.ProjectNotFound;
+import com.project_manager.TrackFlow.Exceptions.ResourceNotFound;
 import com.project_manager.TrackFlow.model.Chat;
 import com.project_manager.TrackFlow.model.Project;
 import com.project_manager.TrackFlow.model.User;
@@ -23,7 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
     private UserService userService;
 
     @Override
-    public Project createProject(Project project, User user) throws Exception {
+    public Project createProject(Project project, User user) {
         Project createdProject = new Project();
         createdProject.setName(project.getName());
         createdProject.setOwner(user);
@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getProjectByTeam(User user, String category, String tag) throws Exception {
+    public List<Project> getProjectByTeam(User user, String category, String tag) {
         List<Project> projects = projectRepo.findByTeamContainingOrOwner(user, user);
         if(category != null){
             projects = projects.stream()
@@ -56,22 +56,26 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getProjectById(Integer projectId) throws Exception {
+    public Project getProjectById(Integer projectId) {
         Optional<Project> project = projectRepo.findById(projectId);
         if(project.isEmpty()){
-            throw new ProjectNotFound();
+            throw new ResourceNotFound("Project not found with Id : " + projectId);
         }
         return project.get();
     }
 
     @Override
-    public void deleteProject(Integer projectId, User user) throws Exception {
+    public void deleteProject(Integer projectId, User user) {
+        Optional<Project> project = projectRepo.findById(projectId);
+        if(project.isEmpty()){
+            throw new ResourceNotFound("Project does not exist with Id : " + projectId);
+        }
+        projectRepo.delete(project.get());
         userService.updateProjectsCreated(user, -1);
-        projectRepo.deleteById(projectId);
     }
 
     @Override
-    public Project updateProject(Project updatedProject, Integer projectId) throws Exception {
+    public Project updateProject(Project updatedProject, Integer projectId) {
         Project project = getProjectById(projectId);
         project.setName(updatedProject.getName());
         project.setCategory(updatedProject.getCategory());
@@ -80,7 +84,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addUserToProject(Integer projectId, Integer userId) throws Exception {
+    public void addUserToProject(Integer projectId, Integer userId) {
         Project project = getProjectById(projectId);
         User user = userService.findUserById(userId);
         if(!project.getTeam().contains(user)){
@@ -90,7 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void removeUserFromProject(Integer projectId, Integer userId) throws Exception {
+    public void removeUserFromProject(Integer projectId, Integer userId) {
         Project project = getProjectById(projectId);
         User user = userService.findUserById(userId);
         project.getTeam().add(user);
@@ -99,13 +103,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Chat getChatByProjectId(Integer projectId) throws Exception {
+    public Chat getChatByProjectId(Integer projectId) {
         Project project = getProjectById(projectId);
         return project.getChat();
     }
 
     @Override
-    public List<Project> searchProject(String partialName, User user) throws Exception {
+    public List<Project> searchProject(String partialName, User user) {
         return projectRepo.findByNameContainingAndTeamContains(partialName, user);
     }
 }

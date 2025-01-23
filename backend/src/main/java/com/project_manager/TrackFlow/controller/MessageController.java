@@ -26,7 +26,7 @@ public class MessageController {
     public ResponseEntity<Message> sendMessage(
             @RequestBody MessageRequest messageRequest,
             @RequestHeader("Authorization") String jwtToken
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwtToken);
         Message message = messageService.sendMessage(user, messageRequest.getProjectId(), messageRequest.getContent());
         return new ResponseEntity<>(message, HttpStatus.OK);
@@ -35,7 +35,7 @@ public class MessageController {
     @GetMapping("/chat/{projectId}")
     public ResponseEntity<List<Message>> getMessagesByProjectId(
             @RequestParam Integer projectId
-    ) throws Exception {
+    ) {
         List<Message> messages = messageService.getMessagesByProjectId(projectId);
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }

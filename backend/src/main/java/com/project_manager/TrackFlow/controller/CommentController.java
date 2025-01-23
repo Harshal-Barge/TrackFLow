@@ -27,7 +27,7 @@ public class CommentController {
     public ResponseEntity<Comment> createComment(
             @RequestBody CommentRequest commentRequest,
             @RequestHeader("Authorization") String jwtToken
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwtToken);
         Comment comment = commentService.createComment(commentRequest.getIssueId(),
                 user, commentRequest.getContent());
@@ -38,7 +38,7 @@ public class CommentController {
     public ResponseEntity<ApiResponse> deleteComment(
             @PathVariable Integer commentId,
             @RequestHeader("Authorization") String jwtToken
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwtToken);
         commentService.deleteComment(commentId, user.getId());
         ApiResponse response = new ApiResponse("Comment deleted");
@@ -48,7 +48,7 @@ public class CommentController {
     @GetMapping("/{issueId}")
     public ResponseEntity<List<Comment>> getCommentsByIssueId(
             @PathVariable Integer issueId
-    ) throws Exception {
+    ) {
         List<Comment> comments = commentService.findCommentsByIssueId(issueId);
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }

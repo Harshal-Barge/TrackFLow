@@ -7,9 +7,9 @@ import com.project_manager.TrackFlow.model.User;
 public interface SubscriptionService {
     Subscription createSubscription(User user);
 
-    Subscription getUsersSubscription(Integer userId) throws Exception;
+    Subscription getUsersSubscription(Integer userId);
 
-    Subscription upgradeSubscription(Integer userId, PlanType planType) throws Exception;
+    Subscription upgradeSubscription(Integer userId, PlanType planType);
 
     boolean isValid(Subscription subscription);
 }

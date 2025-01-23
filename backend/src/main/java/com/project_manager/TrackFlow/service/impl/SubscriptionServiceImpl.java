@@ -28,7 +28,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Subscription getUsersSubscription(Integer userId) throws Exception {
+    public Subscription getUsersSubscription(Integer userId) {
         Subscription subscription = subscriptionRepo.findByUserId(userId);
         if(!isValid(subscription)){
             subscription.setPlanType(PlanType.FREE);
@@ -40,7 +40,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Subscription upgradeSubscription(Integer userId, PlanType planType) throws Exception {
+    public Subscription upgradeSubscription(Integer userId, PlanType planType) {
         Subscription subscription = subscriptionRepo.findByUserId(userId);
         subscription.setPlanType(planType);
         subscription.setStartDate(LocalDate.now());

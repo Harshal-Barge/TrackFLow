@@ -21,7 +21,7 @@ public class IssueController {
     @GetMapping("/{issueId}")
     public ResponseEntity<Issue> getIssueById(
             @PathVariable Integer issueId
-    ) throws Exception {
+    ) {
         Issue issue = issueService.getIssueById(issueId);
         return new ResponseEntity<>(issue, HttpStatus.OK);
     }
@@ -29,7 +29,7 @@ public class IssueController {
     @GetMapping("/project/{projectId}")
     public ResponseEntity<List<Issue>> getIssueByProjectId(
             @PathVariable Integer projectId
-    ) throws Exception {
+    ) {
         List<Issue> issues = issueService.getIssuesByProjectId(projectId);
         return new ResponseEntity<>(issues, HttpStatus.OK);
     }
@@ -37,7 +37,7 @@ public class IssueController {
     @PostMapping("/create")
     public ResponseEntity<Issue> createIssue(
             @RequestBody IssueRequest issueRequest
-    ) throws Exception {
+    ) {
         Issue createdIssue = issueService.createIssue(issueRequest);
         return new ResponseEntity<>(createdIssue, HttpStatus.OK);
     }
@@ -45,7 +45,7 @@ public class IssueController {
     @DeleteMapping("/{issueId}")
     public ResponseEntity<ApiResponse> updateIssue(
             @PathVariable Integer issueId
-    ) throws Exception {
+    ) {
         issueService.deleteIssue(issueId);
         ApiResponse response = new ApiResponse("Issue Deleted Successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class IssueController {
     public ResponseEntity<Issue> assignIssue(
             @PathVariable Integer issueId,
             @PathVariable Integer userId
-    ) throws Exception {
+    ) {
         Issue issue = issueService.addUserToIssue(issueId, userId);
         return new ResponseEntity<>(issue, HttpStatus.OK);
     }
@@ -64,7 +64,7 @@ public class IssueController {
     public ResponseEntity<Issue> updateStatus(
             @PathVariable Integer issueId,
             @PathVariable String status
-    ) throws Exception {
+    ) {
         Issue issue = issueService.updateStatus(issueId, status);
         return new ResponseEntity<>(issue, HttpStatus.OK);
     }

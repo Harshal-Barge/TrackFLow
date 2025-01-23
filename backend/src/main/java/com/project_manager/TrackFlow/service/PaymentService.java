@@ -5,5 +5,5 @@ import com.project_manager.TrackFlow.model.User;
 import com.project_manager.TrackFlow.response.PaymentLinkResponse;
 
 public interface PaymentService {
-    PaymentLinkResponse createPaymentLink(PlanType planType, User user) throws Exception;
+    PaymentLinkResponse createPaymentLink(PlanType planType, User user);
 }

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface CommentService {
 
-    Comment createComment(Integer issueId, User user, String content) throws Exception;
+    Comment createComment(Integer issueId, User user, String content);
 
-    void deleteComment(Integer commentId, Integer userId) throws Exception;
+    void deleteComment(Integer commentId, Integer userId);
 
-    List<Comment> findCommentsByIssueId(Integer issueId) throws Exception;
+    List<Comment> findCommentsByIssueId(Integer issueId);
 
 }

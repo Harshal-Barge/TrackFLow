@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface IssueService {
 
-    Issue getIssueById(Integer id) throws Exception;
+    Issue getIssueById(Integer id);
 
-    List<Issue> getIssuesByProjectId(Integer projectId) throws Exception;
+    List<Issue> getIssuesByProjectId(Integer projectId);
 
-    Issue createIssue(IssueRequest issueRequest) throws Exception;
+    Issue createIssue(IssueRequest issueRequest);
 
-    void deleteIssue(Integer issueId) throws Exception;
+    void deleteIssue(Integer issueId);
 
-    Issue addUserToIssue(Integer issueId, Integer userId) throws Exception;
+    Issue addUserToIssue(Integer issueId, Integer userId);
 
-    Issue updateStatus(Integer issueId, String status) throws Exception;
+    Issue updateStatus(Integer issueId, String status);
 
 }

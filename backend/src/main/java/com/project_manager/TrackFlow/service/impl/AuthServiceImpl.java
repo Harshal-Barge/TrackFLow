@@ -1,6 +1,6 @@
 package com.project_manager.TrackFlow.service.impl;
 
-import com.project_manager.TrackFlow.Exceptions.UserAlreadyExists;
+import com.project_manager.TrackFlow.Exceptions.ResourceAlreadyExists;
 import com.project_manager.TrackFlow.config.JwtProvider;
 import com.project_manager.TrackFlow.response.AuthResponse;
 import com.project_manager.TrackFlow.request.LoginRequest;
@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse createUser(User user){
         Optional<User> usr = userRepository.findByEmail(user.getEmail());
         if(usr.isPresent()){
-            throw new UserAlreadyExists(user.getEmail());
+            throw new ResourceAlreadyExists("User with this email already exists, Email : "+user.getEmail());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
@@ -54,7 +54,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse loginUser(LoginRequest loginRequest){
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
         if(!passwordEncoder.matches(loginRequest.getPassword(), userDetails.getPassword())){
-            throw new BadCredentialsException("Incorrect password");
+            throw new BadCredentialsException("Incorrect userName or password");
         }
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

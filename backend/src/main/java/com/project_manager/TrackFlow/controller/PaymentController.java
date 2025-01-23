@@ -24,7 +24,7 @@ public class PaymentController {
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(
             @PathVariable PlanType planType,
             @RequestHeader("Authorization") String jwtToken
-    ) throws Exception {
+    ) {
         User user = userService.findUserProfileByJwt(jwtToken);
         PaymentLinkResponse response = paymentService.createPaymentLink(planType, user);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

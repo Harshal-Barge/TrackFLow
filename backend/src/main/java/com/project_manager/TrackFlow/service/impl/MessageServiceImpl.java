@@ -22,7 +22,7 @@ public class MessageServiceImpl implements MessageService {
     private MessageRepository messageRepository;
 
     @Override
-    public Message sendMessage(User sender, Integer projectId, String content) throws Exception {
+    public Message sendMessage(User sender, Integer projectId, String content) {
         Chat chat = projectService.getChatByProjectId(projectId);
         Message message = new Message();
         message.setContent(content);
@@ -33,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getMessagesByProjectId(Integer projectId) throws Exception {
+    public List<Message> getMessagesByProjectId(Integer projectId) {
         Chat chat = projectService.getChatByProjectId(projectId);
         return messageRepository.findByChatIdOrderBySentTimeAsc(chat.getId());
     }
