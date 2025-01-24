@@ -1,5 +1,6 @@
 package com.project_manager.TrackFlow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Message {
 
     private LocalDate sentTime;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;

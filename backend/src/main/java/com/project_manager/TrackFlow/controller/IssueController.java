@@ -51,7 +51,7 @@ public class IssueController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/{issueId}/assignee/{userId}")
+    @PatchMapping("/{issueId}/assignee/{userId}")
     public ResponseEntity<Issue> assignIssue(
             @PathVariable Integer issueId,
             @PathVariable Integer userId
@@ -60,7 +60,7 @@ public class IssueController {
         return new ResponseEntity<>(issue, HttpStatus.OK);
     }
 
-    @PutMapping("/{issueId}/status/{status}")
+    @PatchMapping("/{issueId}/status/{status}")
     public ResponseEntity<Issue> updateStatus(
             @PathVariable Integer issueId,
             @PathVariable String status

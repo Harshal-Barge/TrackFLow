@@ -34,7 +34,7 @@ public class MessageController {
 
     @GetMapping("/chat/{projectId}")
     public ResponseEntity<List<Message>> getMessagesByProjectId(
-            @RequestParam Integer projectId
+            @PathVariable Integer projectId
     ) {
         List<Message> messages = messageService.getMessagesByProjectId(projectId);
         return new ResponseEntity<>(messages, HttpStatus.OK);
