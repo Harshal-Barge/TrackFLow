@@ -7,7 +7,7 @@ import React from 'react'
 
 export const ProjectCard = () => {
     return (
-        <Card className='p-5 w-full lg:w-[50rem]'>
+        <Card className='p-5 w-full lg:w-[48rem]'>
             <div className='space-y-5'>
                 <div className='space-y-2'>
                     <div className='flex justify-between'>

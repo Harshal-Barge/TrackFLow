@@ -13,7 +13,7 @@ const categories = [
     "frontend",
     "backend"
 ];
-const tags = [
+export const tags = [
     "all",
     "react",
     "nextjs",
@@ -81,7 +81,7 @@ export const ProjectList = () => {
                         </CardContent>
                     </Card>
                 </section >
-                <section className='projectListSection w-full lg:w-[50rem]'>
+                <section className='projectListSection w-full lg:w-[48rem]'>
                     <div className='flex gap-2 items-center pb-5 justify-between'>
                         <div className='relative p-0 w-full'>
                             <Input

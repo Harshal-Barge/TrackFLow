@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+  justify-content: center;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -48,13 +53,10 @@ button {
   transition: border-color 0.25s;
 }
 
-button:hover {
-  border-color: #646cff;
-}
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {
@@ -108,7 +110,7 @@ button:focus-visible {
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 224 71.4% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
