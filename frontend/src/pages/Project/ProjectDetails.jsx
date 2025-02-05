@@ -18,10 +18,10 @@ export const ProjectDetails = () => {
         <>
             <div className='mt-5 lg:px-10'>
                 <div className='lg:flex gap-5 justify-between pb-4'>
-                    <ScrollArea className='h-screen lg:w-[69%] pr-2'>
-                        <div className='text-gray-400 pb-10 w-full'>
+                    <ScrollArea className='h-screen pr-2'>
+                        <div className='text-gray-400 pb-5 w-full'>
                             <h1 className='text-lg font-semibold pb-5'>Create Ecommerce Website</h1>
-                            <div className='space-y-5 pb-10 text-sm'>
+                            <div className='space-y-5 pb-5 text-sm'>
                                 <p className='w-full md:max-w-lg lg:max-w-xl'>
                                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                                     Quaerat facilis corporis quisquam earum expedita dolor,
@@ -64,10 +64,10 @@ export const ProjectDetails = () => {
                             </div>
                             <section>
                                 <p className='py-5 border-b text-lg -tracking-wider'>Tasks</p>
-                                <div className='lg:flex md:flex gap-3 justify-between py-5'>
+                                <div className='lg:flex md:flex gap-3 justify-between py-5 pr-2'>
                                     <IssueList status='pending' title='Todo List' />
-                                    <IssueList status='in-progress' title='task2' />
-                                    <IssueList status='done' title='task2' />
+                                    <IssueList status='in-progress' title='In Progress' />
+                                    <IssueList status='done' title='Done' />
                                 </div>
                             </section>
                         </div>
