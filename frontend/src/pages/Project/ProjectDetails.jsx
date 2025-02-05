@@ -16,7 +16,7 @@ export const ProjectDetails = () => {
 
     return (
         <>
-            <div className='mt-5 lg:px-10'>
+            <div className='mt-5 lg:px-5'>
                 <div className='lg:flex gap-5 justify-between pb-4'>
                     <ScrollArea className='h-screen pr-2'>
                         <div className='text-gray-400 pb-5 w-full'>
@@ -64,7 +64,7 @@ export const ProjectDetails = () => {
                             </div>
                             <section>
                                 <p className='py-5 border-b text-lg -tracking-wider'>Tasks</p>
-                                <div className='lg:flex md:flex gap-3 justify-between py-5 pr-2'>
+                                <div className='lg:flex md:flex gap-3 justify-between py-5 pr-4'>
                                     <IssueList status='pending' title='Todo List' />
                                     <IssueList status='in-progress' title='In Progress' />
                                     <IssueList status='done' title='Done' />
@@ -72,7 +72,7 @@ export const ProjectDetails = () => {
                             </section>
                         </div>
                     </ScrollArea>
-                    <div>
+                    <div className='lg:w-[30%] rounded-md sticky right-5 top-10'>
                         <ChatBox />
                     </div>
                 </div>
