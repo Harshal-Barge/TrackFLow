@@ -4,12 +4,14 @@ import React from 'react'
 import { CreateProjectForm } from '../Project/CreateProjectForm'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { PersonIcon } from '@radix-ui/react-icons'
+import { useNavigate } from 'react-router-dom'
 
 export const Navbar = () => {
+    const navigate = useNavigate()
     return (
         <div className='border py-4 px-5 flex items-center justify-between'>
             <div className='flex items-center gap-3'>
-                <p className='cursor-pointer mx-5 font-bold'>TrackFlow</p>
+                <p onClick={() => navigate("/")} className='cursor-pointer mx-5 font-bold'>TrackFlow</p>
                 <Dialog>
                     <DialogTrigger>
                         <Button variant='ghost'>New Project</Button>
