@@ -20,9 +20,9 @@ export const ChatBox = () => {
                 <h1 className='border-b p-5'>Chat</h1>
                 <ScrollArea className='h-[30rem] w-full p-5 flex gap-3 flex-col'>
                     {[1, 1, 1, 1].map((item, index) => <div key={item} className={`flex gap-2 mb-2 ${index % 2 == 0 ? "justify-start" : "justify-end"}`}>
-                        {index % 2 == 0 ? <Avatar>
+                        {index % 2 == 0 && <Avatar>
                             <AvatarFallback>U</AvatarFallback>
-                        </Avatar> : null}
+                        </Avatar>}
                         <div className='space-y-2 py-2 px-5 border rounded-es-2xl rounded-e-xl'>
                             <p>User</p>
                             <p className='text-gray-300'>How are you?</p>

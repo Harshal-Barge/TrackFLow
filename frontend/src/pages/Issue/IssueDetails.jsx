@@ -19,7 +19,7 @@ export const IssueDetails = () => {
                 <ScrollArea className='h-[80vh] w-[60%]'>
                     <div>
                         <h1 className='text-lg fond-semibold'>Create Navbar</h1>
-                        <div className='py-5'>
+                        <div className='py-5 px-2'>
                             <h2 className='font-semibold'>Description</h2>
                             <p className='text-sm mt-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 Aliquid sequi sint, saepe et adipisci quia quos, hic
