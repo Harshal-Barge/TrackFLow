@@ -28,7 +28,7 @@ public class Issue {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "project_id_key")
+    @JoinColumn(name = "project_id")
     private Project project;
 
     @ManyToOne

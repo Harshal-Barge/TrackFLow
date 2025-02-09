@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IssueRepository extends JpaRepository<Issue, Integer> {
-    List<Issue> findByProject_Id(Integer projectId);
+    List<Issue> findByProjectId(Integer projectId);
 }
