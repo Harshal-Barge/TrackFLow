@@ -12,7 +12,7 @@ function App() {
     <>
 
       <div>
-        {true ? <div> <Navbar />
+        {false ? <div> <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/project/:id' element={<ProjectDetails />} />
