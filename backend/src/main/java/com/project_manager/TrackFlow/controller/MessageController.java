@@ -32,11 +32,11 @@ public class MessageController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @GetMapping("/chat/{projectId}")
-    public ResponseEntity<List<Message>> getMessagesByProjectId(
-            @PathVariable Integer projectId
+    @GetMapping("/chat/{chatId}")
+    public ResponseEntity<List<Message>> getMessagesByChatId(
+            @PathVariable Integer chatId
     ) {
-        List<Message> messages = messageService.getMessagesByProjectId(projectId);
+        List<Message> messages = messageService.getMessagesByChatId(chatId);
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 }

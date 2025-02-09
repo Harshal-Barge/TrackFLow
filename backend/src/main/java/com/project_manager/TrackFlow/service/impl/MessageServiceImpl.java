@@ -33,8 +33,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getMessagesByProjectId(Integer projectId) {
-        Chat chat = projectService.getChatByProjectId(projectId);
-        return messageRepository.findByChatIdOrderBySentTimeAsc(chat.getId());
+    public List<Message> getMessagesByChatId(Integer chatId) {
+        return messageRepository.findByChatIdOrderBySentTimeAsc(chatId);
     }
 }
