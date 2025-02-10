@@ -1,6 +1,7 @@
 package com.project_manager.TrackFlow.Exceptions.ExceptionHandler;
 
 import com.project_manager.TrackFlow.Exceptions.*;
+import com.project_manager.TrackFlow.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,38 +14,38 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFound.class)
-    public ResponseEntity<String> handleResourceNotFound(ResourceNotFound e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApiResponse> handleResourceNotFound(ResourceNotFound e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ResourceAlreadyExists.class)
-    public ResponseEntity<String> handleResourceAlreadyExist(ResourceAlreadyExists e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<ApiResponse> handleResourceAlreadyExist(ResourceAlreadyExists e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
-    public ResponseEntity<String> handleBadCredential(AuthenticationException e){
-        return new ResponseEntity<>("Incorrect userName or password", HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<ApiResponse> handleBadCredential(AuthenticationException e){
+        return new ResponseEntity<>(new ApiResponse("Incorrect userName or password"), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(EmailException.class)
-    public ResponseEntity<String> handleEmailException(EmailException e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ApiResponse> handleEmailException(EmailException e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(InvalidRequest.class)
-    public ResponseEntity<String> handleInvalidRequest(InvalidRequest e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiResponse> handleInvalidRequest(InvalidRequest e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(PaymentException.class)
-    public ResponseEntity<String> handlePaymentException(PaymentException e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ApiResponse> handlePaymentException(PaymentException e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(PermissionDeniedException.class)
-    public ResponseEntity<String> handlePermissionDeniedException(PermissionDeniedException e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<ApiResponse> handlePermissionDeniedException(PermissionDeniedException e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
 }
