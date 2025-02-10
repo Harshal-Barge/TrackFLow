@@ -4,6 +4,8 @@ import com.project_manager.TrackFlow.Exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -20,9 +22,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<String> handleBadCredential(BadCredentialsException e){
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
+    public ResponseEntity<String> handleBadCredential(AuthenticationException e){
+        return new ResponseEntity<>("Incorrect userName or password", HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(EmailException.class)
