@@ -10,7 +10,7 @@ export const fetchProjects = ({ category, tag }) => {
             dispatch({ type: FETCH_PROJECT_SUCCESS, projects: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: FETCH_PROJECT_FAILURE, error: error })
+            dispatch({ type: FETCH_PROJECT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -24,7 +24,7 @@ export const searchProjects = ({ keyWord }) => {
             dispatch({ type: SEARCH_PROJECT_SUCCESS, projects: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: SEARCH_PROJECT_FAILURE, error: error })
+            dispatch({ type: SEARCH_PROJECT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -38,7 +38,7 @@ export const createProjects = (projectData) => {
             dispatch({ type: CREATE_PROJECT_SUCCESS, project: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: CREATE_PROJECT_FAILURE, error: error })
+            dispatch({ type: CREATE_PROJECT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -52,7 +52,7 @@ export const fetchProjectByID = (projectId) => {
             dispatch({ type: FETCH_PROJECT_BY_ID_SUCCESS, project: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: FETCH_PROJECT_BY_ID_FAILURE, error: error })
+            dispatch({ type: FETCH_PROJECT_BY_ID_FAILURE, error: error.response.data })
         }
     }
 }
@@ -66,7 +66,7 @@ export const deleteProject = (projectId) => {
             dispatch({ type: DELETE_PROJECT_SUCCESS, projectId })
         } catch (error) {
             console.log(error);
-            dispatch({ type: DELETE_PROJECT_FAILURE, error: error })
+            dispatch({ type: DELETE_PROJECT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -80,7 +80,7 @@ export const inviteToProject = ({ email, projectId }) => {
             dispatch({ type: INVITE_TO_PROJECT_SUCCESS, payload: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: INVITE_TO_PROJECT_FAILURE, error: error })
+            dispatch({ type: INVITE_TO_PROJECT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -95,7 +95,7 @@ export const acceptProjectInvite = ({ invitationToken, navigate }) => {
             dispatch({ type: ACCEPT_INVITATION_SUCCESS, payload: data })
         } catch (error) {
             console.log(error);
-            dispatch({ type: ACCEPT_INVITATION_FAILURE, error: error })
+            dispatch({ type: ACCEPT_INVITATION_FAILURE, error: error.response.data })
         }
     }
 }

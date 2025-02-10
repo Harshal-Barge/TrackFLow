@@ -14,7 +14,7 @@ export const getUserSubscription = () => {
             console.log("error", error);
             dispatch({
                 type: GET_USER_SUBSCRIPTION_FAILURE,
-                error
+                error: error.response.data
             })
         }
     }
@@ -37,7 +37,7 @@ export const upgradeSubscription = ({ planType }) => {
             console.log("error", error);
             dispatch({
                 type: UPDATE_SUBSCRIPTION_FAILURE,
-                error
+                error: error.response.data
             })
         }
     }

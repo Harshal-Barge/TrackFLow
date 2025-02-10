@@ -19,7 +19,7 @@ export const createIssues = (issueData) => {
             console.log("error", error);
             dispatch({
                 type: CREATE_ISSUE_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -38,7 +38,7 @@ export const fetchIssues = (projectId) => {
             console.log("error", error);
             dispatch({
                 type: FETCH_ISSUES_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -57,7 +57,7 @@ export const fetchIssueById = (issueId) => {
             console.log("error", error);
             dispatch({
                 type: FETCH_ISSUE_BY_ID_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -76,7 +76,7 @@ export const updateIssueStatus = (issueId, status) => {
             console.log("error", error);
             dispatch({
                 type: UPDATE_ISSUE_STATUS_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -95,7 +95,7 @@ export const assigneIssueToUser = (issueId, userId) => {
             console.log("error", error);
             dispatch({
                 type: ASSIGN_ISSUE_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -114,7 +114,7 @@ export const deleteIssue = (issueId) => {
             console.log("error", error);
             dispatch({
                 type: DELETE_ISSUE_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }

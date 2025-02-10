@@ -13,7 +13,7 @@ export const register = (userData) => {
             console.log("register success", data);
         } catch (error) {
             console.log(error)
-            dispatch({ type: REGISTER_FAILURE, error: error })
+            dispatch({ type: REGISTER_FAILURE, error: error.response.data })
         }
     }
 }
@@ -29,8 +29,8 @@ export const login = (userData) => {
             }
             console.log("Login success", data);
         } catch (error) {
-            console.log(error)
-            dispatch({ type: LOGIN_FAILURE, error: error })
+            console.log(error.response.data)
+            dispatch({ type: LOGIN_FAILURE, error: error.response.data })
         }
     }
 }
@@ -47,7 +47,7 @@ export const getUser = () => {
             dispatch({ type: GET_USER_SUCCESS, payload: data })
         } catch (error) {
             console.log(error)
-            dispatch({ type: GET_USER_FAILURE, error: error })
+            dispatch({ type: GET_USER_FAILURE, error: error.response.data })
         }
     }
 }

@@ -14,7 +14,7 @@ export const sendMessage = (messageData) => {
             console.log(error)
             dispatch({
                 type: SEND_MESSAGE_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -33,7 +33,7 @@ export const fetchChatByProject = (projectId) => {
             console.log(error)
             dispatch({
                 type: FETCH_CHAT_BY_PROJECT_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }
@@ -52,7 +52,7 @@ export const fetchChatMessages = (chatId) => {
             console.log(error)
             dispatch({
                 type: FETCH_CHAT_MESSAGES_FAILURE,
-                error: error
+                error: error.response.data
             })
         }
     }

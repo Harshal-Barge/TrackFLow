@@ -12,7 +12,7 @@ export const createComment = (commentData) => {
             })
         } catch (error) {
             console.log("error", error)
-            dispatch({ type: CREATE_COMMENT_FAILURE, error: error })
+            dispatch({ type: CREATE_COMMENT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -28,7 +28,7 @@ export const deleteComment = (commentId) => {
             })
         } catch (error) {
             console.log("error", error)
-            dispatch({ type: DELETE_COMMENT_FAILURE, error: error })
+            dispatch({ type: DELETE_COMMENT_FAILURE, error: error.response.data })
         }
     }
 }
@@ -44,7 +44,7 @@ export const fetchComments = (issueId) => {
             })
         } catch (error) {
             console.log("error", error)
-            dispatch({ type: FETCH_COMMENT_FAILURE, error: error })
+            dispatch({ type: FETCH_COMMENT_FAILURE, error: error.response.data })
         }
     }
 }
