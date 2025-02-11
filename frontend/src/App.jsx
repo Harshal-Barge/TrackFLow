@@ -1,24 +1,25 @@
-import { Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
-import { Navbar } from './pages/Navbar/Navbar'
-import { ProjectDetails } from './pages/Project/ProjectDetails'
-import { IssueDetails } from './pages/Issue/IssueDetails'
-import { Subscription } from './pages/Subscription/Subscription'
 import { Auth } from './pages/Auth/Auth'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from './redux/Auth/Action'
 
 function App() {
 
+  const dispatch = useDispatch();
+
+  const auth = useSelector((store) => store.auth);
+  useEffect(() => {
+    if (!auth.user) {
+      dispatch(getUser());
+    }
+  }, [auth.jwt])
+  console.log(auth);
+
   return (
     <>
-
       <div>
-        {false ? <div> <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/project/:id' element={<ProjectDetails />} />
-            <Route path='/project/:projectId/issue/:issueId' element={<IssueDetails />} />
-            <Route path='/upgradePlan' element={<Subscription />} />
-          </Routes > </div> : <Auth />}
+        {auth.user ? <Home /> : <Auth />}
       </div>
     </>
   )
