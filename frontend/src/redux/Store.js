@@ -6,6 +6,15 @@ import { ChatReducer } from "./Chat/Reducer";
 import { CommentReducer } from "./Comment/Reducer";
 import { IssueReducer } from "./Issue/Reducer";
 import { SubscriptionReducer } from "./Subscription/Reducer";
+import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/es/persistReducer";
+import persistStore from "redux-persist/es/persistStore";
+
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ["auth", "subscription"]
+};
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
@@ -13,7 +22,11 @@ const rootReducer = combineReducers({
     chat: ChatReducer,
     comment: CommentReducer,
     issue: IssueReducer,
-    subscription: SubscriptionReducer
+    subscription: SubscriptionReducer,
 })
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+const persitedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = legacy_createStore(persitedReducer, applyMiddleware(thunk));
+
+export const persistor = persistStore(store);
