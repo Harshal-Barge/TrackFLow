@@ -1,10 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { register } from '@/redux/Auth/Action';
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 export const SignUp = () => {
+    const dispatch = useDispatch();
     const form = useForm({
         defaultValues: {
             email: "",
@@ -14,7 +17,8 @@ export const SignUp = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(register(data))
+        console.log("SignUp success");
     };
     return (
         <div className='space-y-5'>

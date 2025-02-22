@@ -60,7 +60,7 @@ export const ProjectReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 projects: state.projects.filter(
-                    (project) => project.id === action.projectId
+                    (project) => project.id !== action.projectId
                 ),
                 error: null
             }

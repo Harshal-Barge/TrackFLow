@@ -7,8 +7,11 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { tags } from './ProjectList'
 import { Cross1Icon } from '@radix-ui/react-icons'
+import { useDispatch } from 'react-redux'
+import { createProjects } from '@/redux/Project/Action'
 
 export const CreateProjectForm = () => {
+    const dispatch = useDispatch();
     const form = useForm({
         defaultValues: {
             name: "",
@@ -19,6 +22,7 @@ export const CreateProjectForm = () => {
     })
 
     const onSubmit = (data) => {
+        dispatch(createProjects(data));
         console.log("create project data", data)
     }
 
