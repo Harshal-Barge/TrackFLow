@@ -23,9 +23,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentLinkResponse createPaymentLink(PlanType planType, User user) {
-        int amount = 7900;
+        double amount = 79900;
         if(planType.equals(PlanType.ANNUALLY)){
-            amount = (int)((amount * 12) * 0.7);;
+            amount = (amount * 12) * 0.7;
         }
         try{
             RazorpayClient razorpay = new RazorpayClient(apiKey, apiSecret);
