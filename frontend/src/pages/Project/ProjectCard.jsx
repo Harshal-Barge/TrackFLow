@@ -15,12 +15,12 @@ export const ProjectCard = ({ data }) => {
         dispatch(deleteProject(data.id));
     }
     return (
-        <Card className='p-5 w-full lg:w-[48rem]'>
+        <Card onClick={() => navigate(`/project/${data.id}`)} className='p-5 w-full lg:w-[48rem]'>
             <div className='space-y-5'>
                 <div className='space-y-2'>
                     <div className='flex justify-between'>
                         <div className='flex items-center gap-5'>
-                            <h1 onClick={() => navigate(`/project/${data.id}`)} className='cursor-pointer font-bold text-lg'>
+                            <h1 className='cursor-pointer font-bold text-lg'>
                                 {data.name}
                             </h1>
                             <DotFilledIcon />

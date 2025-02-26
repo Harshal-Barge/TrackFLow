@@ -16,10 +16,10 @@ export const IssueCard = ({ data, projectId }) => {
         dispatch(deleteIssue(data.id));
     }
     return (
-        <Card className='rounded-md py-1 pb-2'>
+        <Card onClick={() => navigate(`/project/${projectId}/issue/${data.id}`)} className='rounded-md py-1 pb-2'>
             <CardHeader className='py-0 pb-1'>
                 <div className='flex justify-between items-center'>
-                    <CardTitle className='cursor-pointer' onClick={() => navigate(`/project/${projectId}/issue/${data.id}`)}>{data.title}</CardTitle>
+                    <CardTitle className='cursor-pointer'>{data.title}</CardTitle>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <Button className='rounded-full' size='icon' variant='ghost'><DotsVerticalIcon /></Button>
