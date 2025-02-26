@@ -30,4 +30,12 @@ public class User {
     private List<Issue> assignedIssues = new ArrayList<>();
 
     private int projectsCreated;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        return this.id.equals(user.id) && this.email.equals(user.email);
+    }
 }

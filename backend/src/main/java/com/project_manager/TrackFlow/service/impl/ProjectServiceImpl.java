@@ -85,13 +85,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void addUserToProject(Integer projectId, Integer userId) {
+    public void addUserToProject(Integer projectId, User user) {
         Project project = getProjectById(projectId);
-        User user = userService.findUserById(userId);
         if(!project.getTeam().contains(user)){
             project.getTeam().add(user);
             project.getChat().getUsers().add(user);
         }
+        projectRepo.save(project);
     }
 
     @Override

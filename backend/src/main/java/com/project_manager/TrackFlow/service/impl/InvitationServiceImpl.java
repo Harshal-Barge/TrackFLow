@@ -29,7 +29,7 @@ public class InvitationServiceImpl implements InvitationService {
         invitation.setProjectId(projectId);
         invitationRepo.save(invitation);
 
-        String inviteLink = "http://localhost:5173/accept_invitaion?token="+inviteToken;
+        String inviteLink = "http://localhost:5173/accept_invitation?token="+inviteToken;
         emailService.sendEmailWithToken(email, inviteLink);
     }
 

@@ -18,7 +18,7 @@ public interface ProjectService {
 
     Project updateProject(Project updatedProject, Integer projectId);
 
-    void addUserToProject(Integer projectId, Integer userId);
+    void addUserToProject(Integer projectId, User user);
 
     void removeUserFromProject(Integer projectId, Integer userId);
 
