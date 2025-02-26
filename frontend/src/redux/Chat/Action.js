@@ -29,6 +29,7 @@ export const fetchChatByProject = (projectId) => {
                 type: FETCH_CHAT_BY_PROJECT_SUCCESS,
                 chat: data
             });
+            console.log("chat obj", data)
         } catch (error) {
             console.log(error)
             dispatch({

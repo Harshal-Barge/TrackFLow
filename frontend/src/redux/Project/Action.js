@@ -48,7 +48,7 @@ export const fetchProjectByID = (projectId) => {
         dispatch({ type: FETCH_PROJECT_BY_ID_REQUEST })
         try {
             const { data } = await api.get(`/api/project/${projectId}`)
-            console.log("fetch by id project", data)
+            console.log("fetch by project by Id", data)
             dispatch({ type: FETCH_PROJECT_BY_ID_SUCCESS, project: data })
         } catch (error) {
             console.log(error);

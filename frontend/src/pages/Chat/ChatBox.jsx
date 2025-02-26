@@ -2,13 +2,23 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { fetchChatByProject, fetchChatMessages, sendMessage } from '@/redux/Chat/Action'
 import { PaperPlaneIcon } from '@radix-ui/react-icons'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const ChatBox = () => {
+export const ChatBox = ({ projectId }) => {
     const [message, setMessage] = useState("");
+    const dispatch = useDispatch();
+    const { chat, auth } = useSelector((state) => state);
+
+    useEffect(() => {
+        dispatch(fetchChatByProject(projectId));
+    }, []);
+
     const handleSendMessage = () => {
-        console.log(message);
+        dispatch(sendMessage({ content: message, projectId }));
+        console.log("messages", chat);
         setMessage("");
     }
     const handleMessageChange = (e) => {
@@ -19,13 +29,13 @@ export const ChatBox = () => {
             <div className='border rounded-lg'>
                 <h1 className='border-b p-5'>Chat</h1>
                 <ScrollArea className='h-[30rem] w-full p-5 flex gap-3 flex-col'>
-                    {[1, 1, 1, 1].map((item, index) => <div key={item} className={`flex gap-2 mb-2 ${index % 2 == 0 ? "justify-start" : "justify-end"}`}>
-                        {index % 2 == 0 && <Avatar>
-                            <AvatarFallback>U</AvatarFallback>
+                    {chat?.messages.map((item) => <div key={item.id} className={`flex gap-2 mb-2 ${item?.sender.id === auth.user.id ? "justify-end" : "justify-start"}`}>
+                        {item?.sender.id !== auth.user.id && <Avatar>
+                            <AvatarFallback>{item?.sender?.fullName[0] || "#"}</AvatarFallback>
                         </Avatar>}
                         <div className='space-y-2 py-2 px-5 border rounded-es-2xl rounded-e-xl'>
-                            <p>User</p>
-                            <p className='text-gray-300'>How are you?</p>
+                            <p>{item.sender.fullName}</p>
+                            <p className='text-gray-300'>{item.content}</p>
                         </div>
                     </div>)}
                 </ScrollArea>

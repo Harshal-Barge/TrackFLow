@@ -5,15 +5,21 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { DotsVerticalIcon, PersonIcon } from '@radix-ui/react-icons'
 import React from 'react'
 import { UserList } from '../User/UserList'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deleteIssue } from '@/redux/Issue/Action'
 
-export const IssueCard = () => {
+export const IssueCard = ({ data, projectId }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleIssueDelete = () => {
+        dispatch(deleteIssue(data.id));
+    }
     return (
         <Card className='rounded-md py-1 pb-2'>
             <CardHeader className='py-0 pb-1'>
                 <div className='flex justify-between items-center'>
-                    <CardTitle className='cursor-pointer' onClick={() => navigate("/project/:3/issue/:1")}>Create NavBar</CardTitle>
+                    <CardTitle className='cursor-pointer' onClick={() => navigate(`/project/${projectId}/issue/${data.id}`)}>{data.title}</CardTitle>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <Button className='rounded-full' size='icon' variant='ghost'><DotsVerticalIcon /></Button>
@@ -22,7 +28,7 @@ export const IssueCard = () => {
                             <DropdownMenuItem>In-Progress</DropdownMenuItem>
                             <DropdownMenuItem>Done</DropdownMenuItem>
                             <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleIssueDelete}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
@@ -37,13 +43,13 @@ export const IssueCard = () => {
                                 className='bg-gray-900 hover:text-black text-white rounded-full'>
                                 <Avatar>
                                     <AvatarFallback>
-                                        <PersonIcon />
+                                        {data?.assignee?.fullName[0] || "U"}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <UserList />
+                            <UserList issueId={data.id} />
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

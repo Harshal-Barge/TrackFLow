@@ -39,6 +39,7 @@ export const ChatReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
+                messages: action.chat.messages,
                 chat: action.chat
             }
 

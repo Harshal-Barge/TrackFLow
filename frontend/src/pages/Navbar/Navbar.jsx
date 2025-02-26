@@ -14,7 +14,7 @@ export const Navbar = () => {
     const auth = useSelector((state) => state.auth)
 
     const handleLogout = () => {
-        dispatch(logout())
+        dispatch(logout());
     }
     return (
         <div className='border py-4 px-5 flex items-center justify-between'>

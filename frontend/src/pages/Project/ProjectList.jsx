@@ -38,11 +38,11 @@ export const ProjectList = () => {
 
     const dispatch = useDispatch();
 
-    const project = useSelector((state) => state.project);
+    const { project, auth } = useSelector((state) => state);
 
     useEffect(() => {
         dispatch(fetchProjects({}));
-    }, [])
+    }, [auth.user])
 
     const handleFilterChange = (filterType, value) => {
         setFilter((prevFilters) => {

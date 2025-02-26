@@ -14,12 +14,11 @@ function App() {
       dispatch(getUser());
     }
   }, [auth.jwt])
-  console.log(auth);
 
   return (
     <>
       <div>
-        {auth.user ? <Home /> : <Auth />}
+        {!auth.user ? <Auth /> : <Home />}
       </div>
     </>
   )
