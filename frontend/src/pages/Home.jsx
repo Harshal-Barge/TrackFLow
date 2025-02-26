@@ -6,6 +6,7 @@ import { ProjectDetails } from './Project/ProjectDetails'
 import { IssueDetails } from './Issue/IssueDetails'
 import { Subscription } from './Subscription/Subscription'
 import { UpgradePlanSuccess } from './Subscription/UpgradePlanSuccess'
+import { AcceptInvitation } from './Project/AcceptInvitation'
 
 export const Home = () => {
     return (
@@ -17,6 +18,7 @@ export const Home = () => {
                 <Route path='/project/:projectId/issue/:issueId' element={<IssueDetails />} />
                 <Route path='/upgradePlan' element={<Subscription />} />
                 <Route path='/upgrade_plan/success' element={<UpgradePlanSuccess />} />
+                <Route path='/accept_invitation' element={<AcceptInvitation />} />
             </Routes >
         </div >
     )
