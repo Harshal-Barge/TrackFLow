@@ -38,11 +38,7 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public List<Issue> getIssuesByProjectId(Integer projectId) {
-        List<Issue> issues = issueRepository.findByProjectId(projectId);
-        if(issues.isEmpty()){
-            throw new ResourceNotFound("No issues created for this project");
-        }
-        return issues;
+        return issueRepository.findByProjectId(projectId);
     }
 
     @Override
