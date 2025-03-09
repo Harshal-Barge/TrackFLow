@@ -5,8 +5,10 @@ import { login } from '@/redux/Auth/Action';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const error = useSelector((state) => state.auth.error);
     const form = useForm({
@@ -17,7 +19,12 @@ export const Login = () => {
     });
 
     const onSubmit = (data) => {
-        dispatch(login(data));
+        dispatch(login(data)).then((result) => {
+            console.log("result", result)
+            if (result.meta.requestStatus === 'fulfilled') {
+                navigate('/');
+            }
+        });
     };
     return (
         <div className='space-y-5'>
@@ -46,13 +53,10 @@ export const Login = () => {
                             </FormControl>
                             <FormMessage />
                         </FormItem>} />
-                    {/* {error && <div className='mt-1 text-red-600'>{error}</div>} */}
+                    {error && <div className='mt-1 text-red-600'>{error.message}</div>}
                     <Button type='submit' className='w-full'>Login</Button>
                 </form>
             </Form>
-
-
-
         </div>
     )
 }

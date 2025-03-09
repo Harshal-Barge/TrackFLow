@@ -22,10 +22,6 @@ export const ProjectDetails = () => {
         dispatch(fetchProjectByID(id));
     }, [id])
 
-    const handleProjectInvitation = () => {
-
-    }
-
     return (
         <>
             <div className='mt-5 lg:px-5'>
@@ -49,13 +45,11 @@ export const ProjectDetails = () => {
                                         </Avatar>)}
                                     </div>
                                     <Dialog>
-                                        <DialogTrigger>
-                                            <DialogClose>
-                                                <Button className='mx-1' size='sm' variant='outline' onClick={handleProjectInvitation}>
-                                                    <span>invite</span>
-                                                    <PlusIcon className='w-3 h-3' />
-                                                </Button>
-                                            </DialogClose>
+                                        <DialogTrigger asChild>
+                                            <Button className='mx-1' size='sm' variant='outline'>
+                                                <span>invite</span>
+                                                <PlusIcon className='w-3 h-3' />
+                                            </Button>
                                         </DialogTrigger>
                                         <DialogContent>
                                             <DialogHeader>Invite User</DialogHeader>

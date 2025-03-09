@@ -5,8 +5,10 @@ import { register } from '@/redux/Auth/Action';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const form = useForm({
         defaultValues: {
@@ -17,8 +19,12 @@ export const SignUp = () => {
     });
 
     const onSubmit = (data) => {
-        dispatch(register(data))
-        console.log("SignUp success");
+        dispatch(register(data)).then((result) => {
+            console.log("result", result)
+            if (result.meta.requestStatus === 'fulfilled') {
+                navigate('/');
+            }
+        });
     };
     return (
         <div className='space-y-5'>

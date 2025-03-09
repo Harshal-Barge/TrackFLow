@@ -7,13 +7,16 @@ export const register = (userData) => {
         try {
             const { data } = await api.post("/auth/signup", userData);
             if (data.jwt) {
-                localStorage.setItem("jwt", data.jwt)
-                dispatch({ type: REGISTER_SUCCESS, payload: data })
+                localStorage.setItem("jwt", data.jwt);
+                api.defaults.headers.common["Authorization"] = `Bearer ${data.jwt}`;
+                dispatch({ type: REGISTER_SUCCESS, payload: data });
             }
             console.log("register success", data);
+            return { meta: { requestStatus: "fulfilled" } };
         } catch (error) {
             console.log(error)
             dispatch({ type: REGISTER_FAILURE, error: error.response.data })
+            return { meta: { requestStatus: "rejected" } };
         }
     }
 }
@@ -25,12 +28,15 @@ export const login = (userData) => {
             const { data } = await api.post("/auth/signin", userData);
             if (data.jwt) {
                 localStorage.setItem("jwt", data.jwt)
+                api.defaults.headers.common["Authorization"] = `Bearer ${data.jwt}`;
                 dispatch({ type: LOGIN_SUCCESS, payload: data })
             }
             console.log("Login success", data);
+            return { meta: { requestStatus: "fulfilled" } };
         } catch (error) {
             console.log(error.response.data)
             dispatch({ type: LOGIN_FAILURE, error: error.response.data })
+            return { meta: { requestStatus: "rejected" } };
         }
     }
 }
@@ -45,16 +51,18 @@ export const getUser = () => {
                 }
             });
             dispatch({ type: GET_USER_SUCCESS, payload: data })
+            return { meta: { requestStatus: "fulfilled" } };
         } catch (error) {
             console.log(error)
             dispatch({ type: GET_USER_FAILURE, error: error.response.data })
+            return { meta: { requestStatus: "rejected" } };
         }
     }
 }
 
 export const logout = () => {
     return async (dispatch) => {
-        dispatch({ type: LOGOUT })
-        localStorage.clear()
+        dispatch({ type: LOGOUT });
+        localStorage.clear();
     }
 }

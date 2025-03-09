@@ -41,7 +41,7 @@ export const ChatBox = ({ projectId }) => {
                 </ScrollArea>
                 <div className='relative p-0'>
                     <Input
-                        placeHolder="Message.."
+                        placeholder="Message.."
                         className='py-7 border-t outline-none focus:outline-none focus:ring-0 rounded-none border-b-0 border-x-0'
                         value={message}
                         onChange={handleMessageChange} />
